@@ -1,4 +1,4 @@
-package callcenter.context.model;
+package app.callcenter.context.model.state;
 
 /**
  * Created by IntelliJ IDEA.
@@ -11,5 +11,7 @@ package callcenter.context.model;
 public interface State {
 
     void doAction();
+
+
 
 }

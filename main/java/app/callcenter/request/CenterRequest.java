@@ -1,4 +1,4 @@
-package callcenter.request;
+package app.callcenter.request;
 
 /**
  * Created by IntelliJ IDEA.

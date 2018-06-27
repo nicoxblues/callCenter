@@ -1,6 +1,6 @@
-package callcenter.model.employes;
+package app.callcenter.model.employes;
 
-import callcenter.model.employes.constantes.EmployeCTE;
+import app.callcenter.model.employes.constantes.EmployeCTE;
 
 /**
  * Created by IntelliJ IDEA.

@@ -1,4 +1,4 @@
-package callcenter.model.employes.constantes;
+package app.callcenter.model.employes.constantes;
 
 /**
  * Created by IntelliJ IDEA.

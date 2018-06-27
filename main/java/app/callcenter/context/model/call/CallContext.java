@@ -1,6 +1,6 @@
-package callcenter.context.model.call;
+package app.callcenter.context.model.call;
 
-import callcenter.context.model.Context;
+import app.callcenter.context.model.Context;
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,6 +13,13 @@ import callcenter.context.model.Context;
 public class CallContext extends Context {
 
 
+
+    @Override
+    protected void initCommunication() {
+        this.getContextOwnerEmploye();
+
+    }
+
     @Override
     protected void executeAction() {
 
@@ -20,6 +27,7 @@ public class CallContext extends Context {
 
     @Override
     public void doAction() {
+
         super.doAction();
     }
 }

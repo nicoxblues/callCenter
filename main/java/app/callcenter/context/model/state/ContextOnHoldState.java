@@ -1,4 +1,4 @@
-package callcenter.context.model;
+package app.callcenter.context.model.state;
 
 /**
  * Created by IntelliJ IDEA.

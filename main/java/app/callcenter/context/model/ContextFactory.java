@@ -1,6 +1,6 @@
-package callcenter.context.model;
+package app.callcenter.context.model;
 
-import callcenter.context.model.call.CallContext;
+import app.callcenter.context.model.call.CallContext;
 
 /**
  * Created by IntelliJ IDEA.

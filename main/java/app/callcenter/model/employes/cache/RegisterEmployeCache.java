@@ -1,4 +1,4 @@
-package callcenter.model.employes;
+package app.callcenter.model.employes.cache;
 
 /**
  * Created by IntelliJ IDEA.
