@@ -13,7 +13,10 @@ import app.callcenter.model.employes.constantes.EmployeCTE;
 
 public class Operario extends Employe  {
 
-    public Operario() {
+    public Operario(String name) {
+
+        this.setName(name);
+
         this.setPriorityHierarchy(EmployeCTE.EMPLOYE_JOB_TITLE_OPERADOR);
     }
 }

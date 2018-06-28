@@ -1,6 +1,7 @@
 package app.callcenter.context.model;
 
 import app.callcenter.context.model.call.CallContext;
+import app.callcenter.request.exception.ContextNotImplementedException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -10,14 +11,16 @@ import app.callcenter.context.model.call.CallContext;
  */
 public class ContextFactory {
 
-        public static Context getContext(String contextType){
+        public static Context getContext(String contextType) throws ContextNotImplementedException {
 
             if (contextType.equals("call")){
                 return new CallContext();
-            }
+            }else
+                throw new ContextNotImplementedException("No existe implementacion para el tipo de contexto  " + contextType);
 
 
-            return null;
+
+
         }
 
 

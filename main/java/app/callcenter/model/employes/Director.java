@@ -10,7 +10,11 @@ import app.callcenter.model.employes.constantes.EmployeCTE;
  */
 public class Director extends Employe {
 
-    public Director() {
+
+    public Director(String name) {
+
+        this.setName(name);
+
         this.setPriorityHierarchy(EmployeCTE.EMPLOYE_JOB_TITLE_DIRECTOR);
     }
 }

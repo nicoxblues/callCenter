@@ -3,6 +3,9 @@ package app.callcenter.request;
 import app.callcenter.Dispatcher;
 import app.callcenter.context.model.Context;
 import app.callcenter.context.model.ContextFactory;
+import app.callcenter.request.exception.ContextNotImplementedException;
+
+import java.util.Arrays;
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,14 +19,21 @@ public class DataRequest implements CenterRequest {
     @Override
     public void prosessRequest(String req) {
 
-        Context ctx = ContextFactory.getContext(req);
-
-        Dispatcher dispatcher = new Dispatcher(ctx);
-        dispatcher.dispatcherCall();
-
+        Context ctx;
+        try {
+            ctx = ContextFactory.getContext(req);
 
 
-        // create context
+            Dispatcher dispatcher = new Dispatcher(ctx);
+
+
+            dispatcher.dispatcherCall();
+
+
+        } catch (ContextNotImplementedException e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
+        }
+
 
     }
 }

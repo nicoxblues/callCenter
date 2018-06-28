@@ -13,14 +13,20 @@ public abstract class Employe {
 
     private int priorityHierarchy;
 
+    private String name;
+
     private Context communicationContext;
 
     public Context getCommunicationContext() {
         return communicationContext;
     }
 
-    public void freeTask(){
-        setCommunicationContext(null);
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setCommunicationContext(Context communicationContext) {
@@ -51,6 +57,9 @@ public abstract class Employe {
     }
 
 
+    public void freeTask(){
+        setCommunicationContext(null);
+    }
 
     public void finishContext(){
         if (canFinish())
@@ -58,7 +67,7 @@ public abstract class Employe {
     }
 
     public void initCommunicationContext(){
-        this.communicationContext.start();
+        this.communicationContext.init();
 
 
 

@@ -10,7 +10,9 @@ import app.callcenter.model.employes.constantes.EmployeCTE;
  */
 public class Supervisor extends Employe {
 
-    public Supervisor() {
+    public Supervisor(String name) {
+
+        this.setName(name);
         setPriorityHierarchy(EmployeCTE.EMPLOYE_JOB_TITLE_SUPRVISOR);
     }
 }

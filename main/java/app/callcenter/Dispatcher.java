@@ -24,7 +24,7 @@ public class Dispatcher {
 
     public void dispatcherCall(){
         TurnContextHandler.getInstance().assignContext(this.dispatcherContext);
-        this.dispatcherContext.start();
+        this.dispatcherContext.init();
 
 
 
