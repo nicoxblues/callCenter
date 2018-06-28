@@ -25,9 +25,16 @@ public class DataRequest implements CenterRequest {
 
 
             Dispatcher dispatcher = new Dispatcher(ctx);
+     //       dispatcher.dispatchCall();
+            new Thread(() -> {
+                try {
+                    dispatcher.dispatchCall();
+                }
+                catch (Exception e){
+                    System.err.println(e);
+                }
+            }).start();
 
-
-            dispatcher.dispatcherCall();
 
 
         } catch (ContextNotImplementedException e) {

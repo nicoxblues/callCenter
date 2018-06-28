@@ -13,7 +13,7 @@ public class ContextFinishState implements State {
 
 
     public void doAction() {
-        System.out.println("llamada finalizada");
+        System.out.println("contexto finalizado");
         //Context ctxOnHold = Dispatcher.onHoldQuote.pop()
 
 

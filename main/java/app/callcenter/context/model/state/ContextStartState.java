@@ -6,7 +6,7 @@ public class ContextStartState implements State {
     @Override
     public void doAction() {
 
-            System.out.println("llamada comenzada");
+            System.out.println("contexto iniciado");
 
 
     }

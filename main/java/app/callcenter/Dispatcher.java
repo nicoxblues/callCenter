@@ -22,7 +22,7 @@ public class Dispatcher {
     }
 
 
-    public void dispatcherCall(){
+    public void dispatchCall(){
         TurnContextHandler.getInstance().assignContext(this.dispatcherContext);
         this.dispatcherContext.init();
 

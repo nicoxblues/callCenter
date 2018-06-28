@@ -4,7 +4,7 @@ import app.callcenter.TurnContextHandler;
 import app.callcenter.context.model.state.State;
 import app.callcenter.model.employes.Employe;
 import java.sql.Timestamp;
-
+import java.util.Random;
 
 
 /**
@@ -64,32 +64,31 @@ public abstract class Context implements State {
         return timeStampInitContext;
     }
 
-    public void setTimeStampInitContext(Timestamp timeStampInitContext) {
-        this.timeStampInitContext = timeStampInitContext;
-    }
+
 
     public Timestamp getTimeStampFinishContext() {
         return timeStampFinishContext;
     }
 
-    public void setTimeStampFinishContext(Timestamp timeStampFinishContext) {
-        this.timeStampFinishContext = timeStampFinishContext;
-    }
+
 
     @Override
     public void doAction() {
         this.executeAction();
         if (hasEmploye())
-            System.out.println("Contexto empleado " + this.contextOwnerEmploye.getName()  +  " de jerarquia " + this.contextOwnerEmploye.getPriorityHierarchy());
+            System.out.println("Se asigna contexto de comunicacion a empleado " + this.contextOwnerEmploye.getName()  +  " de jerarquia " + this.contextOwnerEmploye.getPriorityHierarchy());
         else
-            System.out.println("Contexto sin empleado asignado " );
+            System.out.println("No se puedo asignar el contexto a ningun empleado, no hay empleados disponibles " );
 
         this.callState.doAction();
     }
 
+
+
     public void init(){
         this.timeStampInitContext = new Timestamp(System.currentTimeMillis());
         TurnContextHandler.getInstance().initContext(this);
+
 
     }
 

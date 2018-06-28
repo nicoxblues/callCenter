@@ -13,6 +13,6 @@ public class ContextOnHoldState implements State {
 
     @Override
     public void doAction() {
-        System.out.println("llamada en espera");
+        System.out.println("contexto en espera");
     }
 }

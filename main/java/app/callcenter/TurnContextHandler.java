@@ -10,6 +10,7 @@ import app.callcenter.model.employes.constantes.EmployeCTE;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Random;
 
 /**
  * Created by IntelliJ IDEA.
@@ -72,9 +73,29 @@ public class TurnContextHandler {
 
     }
 
+    private void setTimeout(Context ctx, int delay){
+        new Thread(() -> {
+            try {
+                Thread.sleep(delay * 1000);
+                ctx.finish();
+            }
+            catch (Exception e){
+                System.err.println("error en time out" +  e.getStackTrace());
+            }
+        }).start();
+    }
+
+    private int getContextDuration(){
+        Random r = new Random();
+        int Low = 5;
+        int High = 10;
+        return  r.nextInt(High-Low) + Low;
+    }
+
     public void initContext(Context context){
         if (context.hasEmploye()){
             this.startContext(context);
+            this.setTimeout(context,this.getContextDuration());
 
         }else
             this.onHoldContext(context);
@@ -106,8 +127,8 @@ public class TurnContextHandler {
      * */
     public void finishContext(Context context){
 
-        System.out.println("Inicio de la comunicacion " + context.getTimeStampInitContext());
-        System.out.println("Fin de la comunicacion " + context.getTimeStampFinishContext());
+        System.out.println("********************\nInicio de la comunicacion " + context.getTimeStampInitContext());
+        System.out.println("Fin de la comunicacion " + context.getTimeStampFinishContext() + "\n*********************");
 
         context.setState(new ContextFinishState());
         context.doAction();
@@ -141,19 +162,23 @@ public class TurnContextHandler {
 
 
     private Employe findIdleEmploye() {
-        Employe employe = null;
-        if (!this.idleEmployes.isEmpty()) {
-            if (this.idleEmployes.get(EmployeCTE.EMPLOYE_JOB_TITLE_OPERADOR).peek() != null) {
-                employe = this.idleEmployes.get(EmployeCTE.EMPLOYE_JOB_TITLE_OPERADOR).poll();
 
-            }else if (this.idleEmployes.get(EmployeCTE.EMPLOYE_JOB_TITLE_SUPRVISOR).peek() != null) {
-                employe = this.idleEmployes.get(EmployeCTE.EMPLOYE_JOB_TITLE_SUPRVISOR).poll();
 
-            }else if (this.idleEmployes.get(EmployeCTE.EMPLOYE_JOB_TITLE_DIRECTOR).peek() != null) {
-                employe = this.idleEmployes.get(EmployeCTE.EMPLOYE_JOB_TITLE_DIRECTOR).poll();
+            Employe employe = null;
+        synchronized (this) {
+            if (!this.idleEmployes.isEmpty()) {
+                if (this.idleEmployes.get(EmployeCTE.EMPLOYE_JOB_TITLE_OPERADOR).peek() != null) {
+                    employe = this.idleEmployes.get(EmployeCTE.EMPLOYE_JOB_TITLE_OPERADOR).poll();
+
+                } else if (this.idleEmployes.get(EmployeCTE.EMPLOYE_JOB_TITLE_SUPRVISOR).peek() != null) {
+                    employe = this.idleEmployes.get(EmployeCTE.EMPLOYE_JOB_TITLE_SUPRVISOR).poll();
+
+                } else if (this.idleEmployes.get(EmployeCTE.EMPLOYE_JOB_TITLE_DIRECTOR).peek() != null) {
+                    employe = this.idleEmployes.get(EmployeCTE.EMPLOYE_JOB_TITLE_DIRECTOR).poll();
+
+                }
 
             }
-
         }
         return employe;
     }
