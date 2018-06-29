@@ -17,12 +17,6 @@ import java.util.concurrent.*;
  * Time: 5:43 PM.
  */
 public class DataRequest implements CenterRequest {
-    private final static int NTHREAD = 1;
-
-    private static int numCurrentThread = 0;
-
-    private static ExecutorService pool = Executors.newFixedThreadPool(NTHREAD);
-
 
     @Override
     public void prosessRequest(String req) {

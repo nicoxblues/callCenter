@@ -12,6 +12,13 @@ import java.util.UUID;
  * Date: 6/26/18.
  * Time: 3:45 PM.
  */
+
+/**
+ *
+ *  Factory que se encarga de instanciar el contexto solicitado
+
+
+* */
 public class ContextFactory {
 
         public static Context getContext(String contextType) throws ContextNotImplementedException {
