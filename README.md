@@ -45,7 +45,9 @@ La clase ya esta preparada para auto-ejecutarse concurrentemente la misma efectu
 Clase que se ejecuta en un single Thread, pero que realiza las llamadas mediante algunos fors 
 
 
-[Log de test](https://github.com/nicoxblues/callCenter/blob/master/main/test/app/log%20test.txt) 
+[Log de test](https://github.com/nicoxblues/callCenter/blob/master/main/test/app/log%20test.txt)
+    este archivo se genero a mano a partir de la lo que el codigo escribe en consola, 
+    TODO: se podria implementar [log4J](https://logging.apache.org/log4j/2.0/) aunque dado el tamaño de al app no era del todo necesario    
 
 ## Como Funciona 
     
@@ -58,7 +60,7 @@ Las comunicaciones trabajan con un sistema de estados basico, estas pueden estar
 Toda solicutud de comunicacion pasa por un objeto que implementa una interfaz CenterRequest, esto es asi, para dar versatidad a como iniciar la solicitud,
 seria muy sencillo hacer algunas modificacoines para que las solicitudes llegan por medio de un Java Servlet o jsp , o una llamada ajax      
        
-    
+
 
 
 
