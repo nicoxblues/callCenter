@@ -52,7 +52,7 @@ public class DataRequest implements CenterRequest {
 
 
         } catch (ContextNotImplementedException e) {
-            System.out.println(Arrays.toString(e.getStackTrace()));
+            System.out.println(e);
         }catch(RejectedExecutionException exRejectTh){
             System.out.println("Limite de llamadas entrantes ".concat(exRejectTh.getMessage()) );
         }

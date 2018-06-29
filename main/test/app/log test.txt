@@ -1,0 +1,126 @@
+
+Log de Test unitario DataRequestTestSimple
+
+app.callcenter.request.exception.ContextNotImplementedException: No existe implementacion para el tipo de contexto  Hola
+Procesando un total de 1 llamadas concurrentes
+Se asigna contexto 8ec7628c-80c7-4c2b-9b72-e780b8fd7f89-1530284750313 de comunicacion a empleado  Skinner 1 de jerarquia 1
+contexto iniciado
+Procesando un total de 2 llamadas concurrentes
+Se asigna contexto b4ffddf0-1538-4131-a4b7-8a407d881f40-1530284750411 de comunicacion a empleado  Skinner 2 de jerarquia 1
+contexto iniciado
+Finalizacion manual del contexto 8ec7628c-80c7-4c2b-9b72-e780b8fd7f89-1530284750313 Empleado  Skinner 1
+********************
+Inicio de la comunicacion 2018-06-29 12:05:50.411
+Fin de la comunicacion 2018-06-29 12:05:53.915
+*********************
+contexto finalizado
+borrarando context 8ec7628c-80c7-4c2b-9b72-e780b8fd7f89-1530284750313
+Procesando un total de 1 llamadas concurrentes
+*************** Entran 10 llamadas concurrentes ***************************
+Procesando un total de 2 llamadas concurrentes
+Se asigna contexto dbd140ec-c05a-44ed-8747-256e0157d271-1530284753924 de comunicacion a empleado  Skinner 3 de jerarquia 1
+contexto iniciado
+Procesando un total de 3 llamadas concurrentes
+Se asigna contexto 24016fac-b75f-42d2-9768-4425eab632ee-1530284753931 de comunicacion a empleado  Skinner 4 de jerarquia 1
+contexto iniciado
+Procesando un total de 4 llamadas concurrentes
+Se asigna contexto f919bdbd-e95c-44d3-b1ba-55def784ce48-1530284753940 de comunicacion a empleado  Skinner 5 de jerarquia 1
+contexto iniciado
+Procesando un total de 5 llamadas concurrentes
+Se asigna contexto 99b89d6f-704a-46b7-8243-6039f8e358cc-1530284753954 de comunicacion a empleado  Skinner 6 de jerarquia 1
+contexto iniciado
+Procesando un total de 6 llamadas concurrentes
+Se asigna contexto 89af573c-74c4-4d12-b101-77c1bf46fd40-1530284754009 de comunicacion a empleado  Skinner 1 de jerarquia 1
+contexto iniciado
+Procesando un total de 7 llamadas concurrentes
+Se asigna contexto daf6dfb8-5a0f-49b8-9cda-45d1a483618c-1530284754005 de comunicacion a empleado  Supervisor Commodore 64 de jerarquia 2
+contexto iniciado
+Procesando un total de 8 llamadas concurrentes
+Se asigna contexto 80fd0956-d937-4bbb-85cb-f2e720515f68-1530284753999 de comunicacion a empleado  Supervisor Atlonx2  de jerarquia 2
+Procesando un total de 9 llamadas concurrentes
+Se asigna contexto e9c8a513-248d-422e-9294-2fedf83d1b33-1530284753991 de comunicacion a empleado  archundia   de jerarquia 3
+contexto iniciado
+contexto iniciado
+Procesando un total de 10 llamadas concurrentes
+Se asigna contexto 8ebf5dde-01d6-4def-a580-f1672517137b-1530284754014 de comunicacion a empleado  archundia 2  de jerarquia 3
+contexto iniciado
+java.util.concurrent.RejectedExecutionException: Todos Nuestros Operadores estan ocupados, por favor intente nuevamente mas tarde
+********************
+Inicio de la comunicacion 2018-06-29 12:05:50.425
+Fin de la comunicacion 2018-06-29 12:05:57.433
+*********************
+contexto finalizado
+borrarando context b4ffddf0-1538-4131-a4b7-8a407d881f40-1530284750411
+Procesando un total de 9 llamadas concurrentes
+********************
+Inicio de la comunicacion 2018-06-29 12:05:54.035
+Fin de la comunicacion 2018-06-29 12:05:59.081
+*********************
+contexto finalizado
+borrarando context 89af573c-74c4-4d12-b101-77c1bf46fd40-1530284754009
+Procesando un total de 8 llamadas concurrentes
+********************
+Inicio de la comunicacion 2018-06-29 12:05:50.411
+Fin de la comunicacion 2018-06-29 12:05:59.425
+*********************
+contexto finalizado
+borrarando context 8ec7628c-80c7-4c2b-9b72-e780b8fd7f89-1530284750313
+Procesando un total de 8 llamadas concurrentes
+********************
+Inicio de la comunicacion 2018-06-29 12:05:53.949
+Fin de la comunicacion 2018-06-29 12:05:59.973
+*********************
+contexto finalizado
+borrarando context 24016fac-b75f-42d2-9768-4425eab632ee-1530284753931
+Procesando un total de 7 llamadas concurrentes
+********************
+Inicio de la comunicacion 2018-06-29 12:05:53.973
+Fin de la comunicacion 2018-06-29 12:05:59.983
+*********************
+contexto finalizado
+borrarando context f919bdbd-e95c-44d3-b1ba-55def784ce48-1530284753940
+Procesando un total de 6 llamadas concurrentes
+********************
+Inicio de la comunicacion 2018-06-29 12:05:54.036
+Fin de la comunicacion 2018-06-29 12:06:00.043
+*********************
+contexto finalizado
+borrarando context e9c8a513-248d-422e-9294-2fedf83d1b33-1530284753991
+Procesando un total de 5 llamadas concurrentes
+********************
+Inicio de la comunicacion 2018-06-29 12:05:54.036
+Fin de la comunicacion 2018-06-29 12:06:00.053
+*********************
+contexto finalizado
+borrarando context daf6dfb8-5a0f-49b8-9cda-45d1a483618c-1530284754005
+Procesando un total de 4 llamadas concurrentes
+********************
+Inicio de la comunicacion 2018-06-29 12:05:54.043
+Fin de la comunicacion 2018-06-29 12:06:01.081
+*********************
+contexto finalizado
+borrarando context 8ebf5dde-01d6-4def-a580-f1672517137b-1530284754014
+Procesando un total de 3 llamadas concurrentes
+********************
+Inicio de la comunicacion 2018-06-29 12:05:53.934
+Fin de la comunicacion 2018-06-29 12:06:01.95
+*********************
+contexto finalizado
+borrarando context dbd140ec-c05a-44ed-8747-256e0157d271-1530284753924
+Procesando un total de 2 llamadas concurrentes
+********************
+Inicio de la comunicacion 2018-06-29 12:05:54.036
+Fin de la comunicacion 2018-06-29 12:06:02.088
+*********************
+contexto finalizado
+borrarando context 80fd0956-d937-4bbb-85cb-f2e720515f68-1530284753999
+Procesando un total de 1 llamadas concurrentes
+********************
+Inicio de la comunicacion 2018-06-29 12:05:53.992
+Fin de la comunicacion 2018-06-29 12:06:03.036
+*********************
+contexto finalizado
+borrarando context 99b89d6f-704a-46b7-8243-6039f8e358cc-1530284753954
+Procesando un total de 0 llamadas concurrentes
+
+Process finished with exit code 0
