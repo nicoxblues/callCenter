@@ -1,6 +1,6 @@
 # Ejercicio AlMundo - Call Center
 
-## Tecnologias usadas
+## Tecnologías usadas
       
    - [JUnit](http://junit.org/junit5/)
    - [Java 1.8](https://www.oracle.com/index.html)
@@ -29,26 +29,26 @@ ningún empleado libre.
 
 2 - Dar alguna solución sobre qué pasa con una llamada cuando entran
 más de 10 llamadas concurrentes.
- `Si se llega al maximo de llamadas concurrentes, se emite un mensaje 
+ `Si se llega al máximo de llamadas concurrentes, se emite un mensaje 
  diciendo que la llamada no puede ser procesada en este momento que intente mas tarde`
 
 ## Respuestas
 
-- 1\)  `Cuando esto sucede si no se llego al maximo de llamadas 
+- 1\)  `Cuando esto sucede si no se llego al máximo de llamadas 
        concurrentes procesadas, la llamada entra en una lista de espera`
          
          
- - 2\) `Si se llega al maximo de llamadas concurrentes, se emite un mensaje 
+ - 2\) `Si se llega al máximo de llamadas concurrentes, se emite un mensaje 
  diciendo que la llamada no puede ser procesada en este momento que intente mas tarde`
  
   En ambas situaciones la clase que lo resuelve es "TurnContextHandler"
 
 ## Test Unitarios
 
-clases de testeo: <br>
+Clases de testeo: <br>
 
 **DataRequestConcurrenciaTest**: 
-La clase ya esta preparada para auto-ejecutarse concurrentemente la misma efectua  una serie de llamadas   
+La clase ya esta preparada para auto-ejecutarse concurrente mente la misma efectúa  una serie de llamadas   
 
 **DataRequestTestSimple**:
 Clase que se ejecuta en un single Thread, pero que realiza las llamadas mediante algunos fors 
@@ -60,18 +60,17 @@ Clase que se ejecuta en un single Thread, pero que realiza las llamadas mediante
 
 ## Funcionamiento tecnico
     
-Cuando llega una solicitud de comunicacion se genera un objeto 'Context' , un objeto Context encapsulara un tipo de comunicacion con un empleado (Call, Chat, Personal,ticket mediante correo etc..) en el codigo solo 
+Cuando llega una solicitud de comunicación se genera un objeto 'Context' , un objeto Context encapsulara un tipo de comunicación con un empleado (Call, Chat, Personal,Ticket mediante correo etc..) en el código solo 
 esta implementado las 'calls'.
 Existe un objeto Handler/Manager llamado TurnContextHandler, quien es el encargado de administrar todas las comunicaciones, este objeto 
-crea, inicia , y  finaliza todas las comunicaciones que entran, es capaz de procesar 'n' comunicaciones concurrentemente, siendo 'n' una constante dentro del codigo
-aunque podria escalar un poco más y ser un valor dentro de un archivo de configuracion, el handler tambien administra el time out de las llamadas 
-Las comunicaciones trabajan con un sistema de estados basico, estas pueden estar en estado activo, en espera, o finalizado
-Toda solicutud de comunicacion pasa por un objeto que implementa una interfaz CenterRequest, esto es asi, para dar versatidad a como iniciar la solicitud,
-seria muy sencillo hacer algunas modificacoines para que las solicitudes llegan por medio de un Java Servlet o jsp , o una llamada ajax      
+crea, inicia , y  finaliza todas las comunicaciones que entran, es capaz de procesar 'n' comunicaciones concurrente mente, siendo 'n' una constante dentro del código
+aunque podría escalar un poco más y ser un valor dentro de un archivo de configuración, el handler también administra el time out de las llamadas 
+Las comunicaciones trabajan con un sistema de estados básico, estas pueden estar en estado activo, en espera, o finalizado
+Toda solicitud de comunicación pasa por un objeto que implementa una interfaz CenterRequest, esto es así, para dar versatidad a como iniciar la solicitud,
+seria muy sencillo hacer algunas modificaciones para que las solicitudes lleguen por medio de un Java Servlet o jsp , o una llamada ajax      
        
        
 ![GitHub Logo](https://i.ytimg.com/vi/zFBclVWaK_U/hqdefault.jpg)
-
 
 
 
