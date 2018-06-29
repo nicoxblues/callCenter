@@ -49,7 +49,7 @@ Clase que se ejecuta en un single Thread, pero que realiza las llamadas mediante
     este archivo se genero a mano a partir de la lo que el codigo escribe en consola, 
     TODO: se podria implementar [log4J](https://logging.apache.org/log4j/2.0/) aunque dado el tamaño de al app no era del todo necesario    
 
-## Como Funciona 
+## Funcionamiento tecnico
     
 Cuando llega una solicitud de comunicacion se genera un objeto 'Context' , un objeto Context encapsulara un tipo de comunicacion con un empleado (Call, Chat, Personal,ticket mediante correo etc..) en el codigo solo 
 esta implementado las 'calls'.
