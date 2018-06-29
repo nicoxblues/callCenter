@@ -1,5 +1,15 @@
 # Ejercicio AlMundo - Call Center
 
+## Tecnologias usadas
+      
+   - [JUnit](http://junit.org/junit5/)
+   - [Java 1.8](https://www.oracle.com/index.html)
+   - [Maven](https://maven.apache.org/)   
+   - [Intellij IDEA](https://www.jetbrains.com/idea/) (IDE)
+   - [Git](https://git-scm.com/)
+   - [Gitkraken](https://www.gitkraken.com/) interfaz para git   
+   
+    
 ## Consigna
 
 Existe un call center donde hay 3 tipos de empleados: operador, supervisor
@@ -35,6 +45,8 @@ La clase ya esta preparada para auto-ejecutarse concurrentemente la misma efectu
 Clase que se ejecuta en un single Thread, pero que realiza las llamadas mediante algunos fors 
 
 
+[Log de test](https://github.com/nicoxblues/callCenter/blob/master/main/test/app/log%20test.txt) 
+
 ## Como Funciona 
     
 Cuando llega una solicitud de comunicacion se genera un objeto 'Context' , un objeto Context encapsulara un tipo de comunicacion con un empleado (Call, Chat, Personal,ticket mediante correo etc..) en el codigo solo 
@@ -47,10 +59,6 @@ Toda solicutud de comunicacion pasa por un objeto que implementa una interfaz Ce
 seria muy sencillo hacer algunas modificacoines para que las solicitudes llegan por medio de un Java Servlet o jsp , o una llamada ajax      
        
     
-
-## info extra
-    
-Se Utilizo Unit4 para realizar los test unitarios, a nivel concurrencia  
 
 
 
