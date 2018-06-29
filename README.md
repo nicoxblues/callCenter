@@ -60,6 +60,9 @@ Las comunicaciones trabajan con un sistema de estados basico, estas pueden estar
 Toda solicutud de comunicacion pasa por un objeto que implementa una interfaz CenterRequest, esto es asi, para dar versatidad a como iniciar la solicitud,
 seria muy sencillo hacer algunas modificacoines para que las solicitudes llegan por medio de un Java Servlet o jsp , o una llamada ajax      
        
+       
+![GitHub Logo](https://i.ytimg.com/vi/zFBclVWaK_U/hqdefault.jpg)
+
 
 
 
