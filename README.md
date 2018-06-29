@@ -35,7 +35,7 @@ La clase ya esta preparada para auto-ejecutarse concurrentemente la misma efectu
 Clase que se ejecuta en un single Thread, pero que realiza las llamadas mediante algunos fors 
 
 
-## Como Funcinona 
+## Como Funciona 
     
 Cuando llega una solicitud de comunicacion se genera un objeto 'Context' , un objeto Context encapsulara un tipo de comunicacion con un empleado (Call, Chat, Personal,ticket mediante correo etc..) en el codigo solo 
 esta implementado las 'calls'.
