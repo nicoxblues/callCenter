@@ -29,8 +29,6 @@ ningún empleado libre.
 
 2 - Dar alguna solución sobre qué pasa con una llamada cuando entran
 más de 10 llamadas concurrentes.
- `Si se llega al máximo de llamadas concurrentes, se emite un mensaje 
- diciendo que la llamada no puede ser procesada en este momento que intente mas tarde`
 
 ## Respuestas
 
