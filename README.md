@@ -22,17 +22,26 @@ debe ser atendida por un director.
 
 ## Extras/Plus
 
-Dar alguna solución sobre qué pasa con una llamada cuando no hay
+1 - Dar alguna solución sobre qué pasa con una llamada cuando no hay
 ningún empleado libre.
- `Cuando esto sucede si no se llego al maximo de llamadas 
- concurrentes procesadas, la llamada entra en una lista de espera`
 
 
-Dar alguna solución sobre qué pasa con una llamada cuando entran
+
+2 - Dar alguna solución sobre qué pasa con una llamada cuando entran
 más de 10 llamadas concurrentes.
  `Si se llega al maximo de llamadas concurrentes, se emite un mensaje 
  diciendo que la llamada no puede ser procesada en este momento que intente mas tarde`
 
+## Respuestas
+
+- 1\)  `Cuando esto sucede si no se llego al maximo de llamadas 
+       concurrentes procesadas, la llamada entra en una lista de espera`
+         
+         
+ - 2\) `Si se llega al maximo de llamadas concurrentes, se emite un mensaje 
+ diciendo que la llamada no puede ser procesada en este momento que intente mas tarde`
+ 
+  En ambas situaciones la clase que lo resuelve es "TurnContextHandler"
 
 ## Test Unitarios
 
