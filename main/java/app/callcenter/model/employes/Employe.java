@@ -62,8 +62,10 @@ public abstract class Employe {
     }
 
     public void finishContext() throws Exception {
-        if (canFinish())
+        if (canFinish()) {
+            System.out.println("Finalizacion manual del contexto "  + this.communicationContext.getContextID()  + " Empleado " + this.getName());
             this.communicationContext.finish();
+        }
     }
 
     public void initCommunicationContext() throws Exception {

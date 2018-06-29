@@ -18,23 +18,24 @@ import static org.junit.Assert.assertEquals;
 @RunWith(ConcurrentTestRunner.class)
 public class DataRequestConcurrenciaTest {
 
-    private int count = 0;
+    Employe op1 = new Operario("jaime");
 
     @Before
     public void initialCount() throws Exception {
 
         TurnContextHandler conHanlder = TurnContextHandler.getInstance();
-        Employe op1 = new Operario("jaime");
+
         conHanlder.addEmploye(op1);
+
         conHanlder.addEmploye(new Operario(" Skinner 1"));
         conHanlder.addEmploye(new Operario(" Skinner 2"));
-        conHanlder.addEmploye(new Operario(" Skinner 3"));
+      //  conHanlder.addEmploye(new Operario(" Skinner 3"));
         conHanlder.addEmploye(new Operario(" Skinner 4"));
-        conHanlder.addEmploye(new Operario(" Skinner 5"));
-        conHanlder.addEmploye(new Operario(" Skinner 6"));
+    //    conHanlder.addEmploye(new Operario(" Skinner 5"));
+    //    conHanlder.addEmploye(new Operario(" Skinner 6"));
 
-        conHanlder.addEmploye(new Supervisor(" Supervisor Commodore 64"));
-        conHanlder.addEmploye(new Supervisor(" Supervisor Atlonx2 "));
+        //conHanlder.addEmploye(new Supervisor(" Supervisor Commodore 64"));
+    //    conHanlder.addEmploye(new Supervisor(" Supervisor Atlonx2 "));
 
 
 
@@ -53,21 +54,22 @@ public class DataRequestConcurrenciaTest {
 
     @Test
     @ThreadCount(10)
-    public void prosessRequest() throws InterruptedException {
+    public void prosessRequest() throws Exception {
 
 
         CenterRequest data = new DataRequest();
 
 
 
-       // llegan las primeras 5 llamadas (concurrentes)
+       // llegan las primeras 10 llamadas (concurrentes)
         data.prosessRequest("call");
 
 
         Thread.sleep(10000);
 
 
-        // Despues de dos segundos llegan las siguientes 10, no deberia haber problemas ni errores
+
+        // Despues de un tiempo llegan las siguientes 10, no deberia haber problemas ni errores
         data.prosessRequest("call");
 
 
@@ -79,7 +81,7 @@ public class DataRequestConcurrenciaTest {
         data.prosessRequest("call");
 
         Thread.sleep(6500);
-        
+
         data.prosessRequest("call");
 
 

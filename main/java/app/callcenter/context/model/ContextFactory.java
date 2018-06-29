@@ -19,7 +19,7 @@ public class ContextFactory {
             if (contextType.equals("call")){
                 CallContext ctx = new CallContext();
                 String uniqueID = UUID.randomUUID().toString();
-                ctx.setContextID(uniqueID + String.valueOf(new Date().getTime()));
+                ctx.setContextID(uniqueID + "-" +  String.valueOf(new Date().getTime()));
                 return ctx;
             }else
                 throw new ContextNotImplementedException("No existe implementacion para el tipo de contexto  " + contextType);

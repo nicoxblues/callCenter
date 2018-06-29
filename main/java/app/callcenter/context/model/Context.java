@@ -18,7 +18,7 @@ import java.util.Random;
 /**
  *
  *
- * encapsula la comunicacion con un empleado dentro de un contexto, ya sea mediante una call,un chat o hasta en persona;
+ * Encapsula la comunicacion con un empleado dentro de un contexto, ya sea mediante una call,un chat o hasta en persona;
  * quien implemente la clase abstracta implementara la manera de trabajar con ese tipo de contexto.
  * ejemplo ,una call {@link  app.callcenter.context.model.call.CallContext}
  *
@@ -82,10 +82,8 @@ public abstract class Context implements State {
     @Override
     public void doAction() {
         //this.executeAction(() -> finish());
-        if (hasEmploye())
-            System.out.println("Se asigna contexto de comunicacion a empleado " + this.contextOwnerEmploye.getName()  +  " de jerarquia " + this.contextOwnerEmploye.getPriorityHierarchy());
-        else
-            System.out.println("No se puedo asignar el contexto a ningun empleado, no hay empleados disponibles " );
+
+
 
         this.callState.doAction();
     }
@@ -93,9 +91,10 @@ public abstract class Context implements State {
 
 
     public void init()  {
-        this.timeStampInitContext = new Timestamp(System.currentTimeMillis());
-        TurnContextHandler.getInstance().initContext(this);
-
+        synchronized (this) {
+            this.timeStampInitContext = new Timestamp(System.currentTimeMillis());
+            TurnContextHandler.getInstance().initContext(this);
+        }
 
     }
 
@@ -103,10 +102,12 @@ public abstract class Context implements State {
 
     public void finish() throws Exception {
         try {
-            TurnContextHandler handler = TurnContextHandler.getInstance();
-            this.timeStampFinishContext = new Timestamp(System.currentTimeMillis());
-            handler.finishContext(this);
-            handler.assignContextFromWaitingRoom();
+            synchronized (this) {
+                TurnContextHandler handler = TurnContextHandler.getInstance();
+                this.timeStampFinishContext = new Timestamp(System.currentTimeMillis());
+                handler.finishContext(this);
+                handler.assignContextFromWaitingRoom();
+            }
         }catch (Exception ex){
             throw  ex;
         }

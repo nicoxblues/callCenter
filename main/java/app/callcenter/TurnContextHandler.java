@@ -72,6 +72,7 @@ public class TurnContextHandler {
     public void setOnHoldStateContext(Context context){
 
         context.setState(new ContextOnHoldState());
+        System.out.println("No se puedo asignar el contexto "  + context.getContextID() +  " a ningun empleado, no hay empleados disponibles, se agrega a la lista de espera " );
         context.doAction();
 
     }
@@ -109,44 +110,42 @@ public class TurnContextHandler {
     }
 
     public void initContext(Context context) throws RejectedExecutionException {
-            synchronized (TurnContextHandler.this) {
-                if (listCurrentContext.size() < MAX_CURRENT_CONTEXT) {
 
-                    listCurrentContext.put(context.getContextID(), context);
-                    this.logCallProcess();
-                    if (context.hasEmploye()) {
-                        this.startContext(context);
-                        this.setTimeout(context, this.getContextDuration());
 
-                    } else
-                        this.setOnHoldStateContext(context);
-                } else {
-                    this.onHoldQueueContextID.poll();
-                    throw new RejectedExecutionException("Todos Nuestros Operadores estan ocupados, por favor intente nuevamente mas tarde ");
-                }
-            }
+
+        if (context.hasEmploye()) {
+            this.startContext(context);
+            this.setTimeout(context, this.getContextDuration());
+
+        } else
+            this.setOnHoldStateContext(context);
+
+
+
     }
 
 
     public void startContext(Context context){
 
         context.setState(new ContextStartState());
+        System.out.println("Se asigna contexto " + context.getContextID() +  " de comunicacion a empleado " + context.getContextOwnerEmploye().getName()  +  " de jerarquia " + context.getContextOwnerEmploye().getPriorityHierarchy());
         context.doAction();
 
     }
 
-    public void assignContextFromWaitingRoom() throws Exception {
+    public void assignContextFromWaitingRoom()  {
         if (!this.onHoldQueueContextID.isEmpty()) {
-            synchronized (this) {
-                String contextID = this.onHoldQueueContextID.poll();
-                Context ctx = this.listCurrentContext.get(contextID);
 
-                this.assignContext(ctx);
-                assert ctx != null;
-                //if (ctx.hasEmploye())
-                //this.onHoldQueueContextID.poll();
-                ctx.init();
-            }
+            String contextID = this.onHoldQueueContextID.poll();
+            System.out.println("Se extrae el context " + contextID + " de la cola de espera " );
+            Context ctx = this.listCurrentContext.get(contextID);
+
+            this.assignContext(ctx);
+            assert ctx != null;
+            //if (ctx.hasEmploye())
+
+            ctx.init();
+
         }
 
     }
@@ -168,7 +167,7 @@ public class TurnContextHandler {
         if (freeEmploye != null) {
             freeEmploye.freeTask();
             this.idleEmployes.get(freeEmploye.getPriorityHierarchy()).add(freeEmploye);
-            numberContext--;
+
             synchronized (TurnContextHandler.this) {
                 System.out.println("borrarando context "  + context.getContextID());
                 this.listCurrentContext.remove(context.getContextID());
@@ -181,21 +180,24 @@ public class TurnContextHandler {
 
     }
 
-    public void assignContext(Context context){
+    public synchronized void assignContext(Context context){
 
+        if (listCurrentContext.size() < MAX_CURRENT_CONTEXT) {
+            listCurrentContext.put(context.getContextID(), context);
+            this.logCallProcess();
+            Employe employe = findIdleEmploye();
+            //context.setHandler(this);
+            if (employe != null) {
+                context.setEmploye(employe);
+                employe.setCommunicationContext(context);
 
-        Employe employe = findIdleEmploye();
-        //context.setHandler(this);
-        if (employe != null) {
-            context.setEmploye(employe);
-            employe.setCommunicationContext(context);
-
-        }else {
-            synchronized (TurnContextHandler.this) {
+            } else {
+                System.out.println("Se agrega a la cola de espera el contexto " + context.getContextID());
                 this.onHoldQueueContextID.add(context.getContextID());
             }
-        }
-
+        } else {
+            throw new RejectedExecutionException("Todos Nuestros Operadores estan ocupados, por favor intente nuevamente mas tarde ");
+    }
 
 
 
