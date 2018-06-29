@@ -16,7 +16,7 @@ public class CallContext extends Context {
 
     @Override
     protected void initCommunication() {
-        this.getContextOwnerEmploye();
+        //this.getContextOwnerEmploye();
 
     }
 

@@ -18,9 +18,10 @@ import static org.junit.Assert.assertEquals;
 @RunWith(ConcurrentTestRunner.class)
 public class DataRequestConcurrenciaTest {
 
+    private int count = 0;
 
     @Before
-    public void initialCount() {
+    public void initialCount() throws Exception {
 
         TurnContextHandler conHanlder = TurnContextHandler.getInstance();
         Employe op1 = new Operario("jaime");
@@ -40,12 +41,12 @@ public class DataRequestConcurrenciaTest {
 
         conHanlder.addEmploye(new Director(" archundia  "));
         conHanlder.addEmploye(new Director(" archundia 2 "));
-      /*  conHanlder.addEmploye(new Director(" Skinner 5"));
-        conHanlder.addEmploye(new Director(" Skinner 6"));
-        conHanlder.addEmploye(new Director(" Skinner 7"));
-        conHanlder.addEmploye(new Director(" Skinner 8"));
-        conHanlder.addEmploye(new Director(" Skinner 9"));
-*/
+
+
+        // llega un contex sin implementar
+
+        CenterRequest data = new DataRequest();
+        data.prosessRequest("Hola");
 
 
     }
@@ -54,16 +55,38 @@ public class DataRequestConcurrenciaTest {
     @ThreadCount(10)
     public void prosessRequest() throws InterruptedException {
 
-        // llega un contex que el codigo no tiene implementado
+
         CenterRequest data = new DataRequest();
-    //    data.prosessRequest("hola");
 
 
+
+       // llegan las primeras 5 llamadas (concurrentes)
+        data.prosessRequest("call");
+
+
+        Thread.sleep(10000);
+
+
+        // Despues de dos segundos llegan las siguientes 10, no deberia haber problemas ni errores
         data.prosessRequest("call");
 
 
 
-       Thread.sleep(20000);
+
+        Thread.sleep(6500);
+        // a apartir de aca empieza a lanzar la excepcion java.util.concurrent.RejectedExecutionException: Todos Nuestros Operadores estan ocupados, por favor intente nuevamente mas tarde
+        // a menos que se libere un empleado, ahi se le asignara la llamada
+        data.prosessRequest("call");
+
+        Thread.sleep(6500);
+        
+        data.prosessRequest("call");
+
+
+        // nos quedamos esperando a que terminen las demas llamadas
+        Thread.sleep(31000);
+
+
 
 
     }

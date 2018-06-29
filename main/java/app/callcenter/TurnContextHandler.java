@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
+import java.util.concurrent.RejectedExecutionException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,10 +31,12 @@ import java.util.Random;
 
 public class TurnContextHandler {
 
-
+    private static final int MAX_CURRENT_CONTEXT = 10;
+    private int numberContext = 0;
+    private static HashMap<String,Context> listCurrentContext  = new HashMap<>();
     private static TurnContextHandler turnContextHandler;
 
-    private Queue<Context> onHoldQueue = new LinkedList<>();
+    private static  Queue<String> onHoldQueueContextID = new LinkedList<>();
 
 
     private HashMap<Integer,Queue<Employe>> idleEmployes;
@@ -47,7 +50,7 @@ public class TurnContextHandler {
 
     }
 
-    public void addEmploye(Employe employe){
+    public void addEmploye(Employe employe) throws Exception {
 
 
         this.idleEmployes.get(employe.getPriorityHierarchy()).add(employe);
@@ -66,7 +69,7 @@ public class TurnContextHandler {
 
     }
 
-    public void onHoldContext(Context context){
+    public void setOnHoldStateContext(Context context){
 
         context.setState(new ContextOnHoldState());
         context.doAction();
@@ -74,17 +77,26 @@ public class TurnContextHandler {
     }
 
     private void setTimeout(Context ctx, int delay){
-        new Thread(() -> {
-            try {
-                Thread.sleep(delay * 1000);
-                ctx.finish();
-            }
-            catch (Exception e){
-                System.err.println("error en time out" +  e.getStackTrace());
-            }
-        }).start();
+        synchronized (TurnContextHandler.this) {
+            new Thread(() -> {
+                try {
+                    Thread.sleep(delay * 1000);
+
+                    ctx.finish();
+
+                } catch (Exception e) {
+                    System.err.println("time out error" + e);
+                }
+            }).start();
+        }
     }
 
+    /***
+     *
+     *
+     *
+     * @return devuelve un int comprendido entre 5 y 10  que representa un timeOut
+     */
     private int getContextDuration(){
         Random r = new Random();
         int Low = 5;
@@ -92,15 +104,29 @@ public class TurnContextHandler {
         return  r.nextInt(High-Low) + Low;
     }
 
-    public void initContext(Context context){
-        if (context.hasEmploye()){
-            this.startContext(context);
-            this.setTimeout(context,this.getContextDuration());
-
-        }else
-            this.onHoldContext(context);
-
+    private void logCallProcess(){
+        System.out.println("Procesando un total de " + listCurrentContext.size()+ " llamadas concurrentes");
     }
+
+    public void initContext(Context context) throws RejectedExecutionException {
+            synchronized (TurnContextHandler.this) {
+                if (listCurrentContext.size() < MAX_CURRENT_CONTEXT) {
+
+                    listCurrentContext.put(context.getContextID(), context);
+                    this.logCallProcess();
+                    if (context.hasEmploye()) {
+                        this.startContext(context);
+                        this.setTimeout(context, this.getContextDuration());
+
+                    } else
+                        this.setOnHoldStateContext(context);
+                } else {
+                    this.onHoldQueueContextID.poll();
+                    throw new RejectedExecutionException("Todos Nuestros Operadores estan ocupados, por favor intente nuevamente mas tarde ");
+                }
+            }
+    }
+
 
     public void startContext(Context context){
 
@@ -109,13 +135,18 @@ public class TurnContextHandler {
 
     }
 
-    private void assignContextFromWaitingRoom(){
-        if (!this.onHoldQueue.isEmpty()) {
-            Context ctx = this.onHoldQueue.poll();
-            this.assignContext(ctx);
-            assert ctx != null;
-            //if (ctx.hasEmploye())
-            ctx.init();
+    public void assignContextFromWaitingRoom() throws Exception {
+        if (!this.onHoldQueueContextID.isEmpty()) {
+            synchronized (this) {
+                String contextID = this.onHoldQueueContextID.poll();
+                Context ctx = this.listCurrentContext.get(contextID);
+
+                this.assignContext(ctx);
+                assert ctx != null;
+                //if (ctx.hasEmploye())
+                //this.onHoldQueueContextID.poll();
+                ctx.init();
+            }
         }
 
     }
@@ -125,7 +156,7 @@ public class TurnContextHandler {
      * finaliza un contexto y libera al empleado para que pueda atender otra solicitud
      *
      * */
-    public void finishContext(Context context){
+    public void finishContext(Context context) throws Exception {
 
         System.out.println("********************\nInicio de la comunicacion " + context.getTimeStampInitContext());
         System.out.println("Fin de la comunicacion " + context.getTimeStampFinishContext() + "\n*********************");
@@ -134,10 +165,17 @@ public class TurnContextHandler {
         context.doAction();
 
         Employe freeEmploye = context.getContextOwnerEmploye();
-        freeEmploye.freeTask();
-        this.idleEmployes.get(freeEmploye.getPriorityHierarchy()).add(freeEmploye);
-
-        this.assignContextFromWaitingRoom();
+        if (freeEmploye != null) {
+            freeEmploye.freeTask();
+            this.idleEmployes.get(freeEmploye.getPriorityHierarchy()).add(freeEmploye);
+            numberContext--;
+            synchronized (TurnContextHandler.this) {
+                System.out.println("borrarando context "  + context.getContextID());
+                this.listCurrentContext.remove(context.getContextID());
+                this.logCallProcess();
+            }
+            //    this.assignContextFromWaitingRoom();
+        }
 
 
 
@@ -152,8 +190,11 @@ public class TurnContextHandler {
             context.setEmploye(employe);
             employe.setCommunicationContext(context);
 
-        }else
-            this.onHoldQueue.add(context);
+        }else {
+            synchronized (TurnContextHandler.this) {
+                this.onHoldQueueContextID.add(context.getContextID());
+            }
+        }
 
 
 

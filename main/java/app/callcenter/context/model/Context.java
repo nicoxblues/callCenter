@@ -29,7 +29,7 @@ import java.util.Random;
 public abstract class Context implements State {
 
     private State callState;
-
+    private String contextID;
     private Employe contextOwnerEmploye;
 
     private Timestamp timeStampInitContext;
@@ -39,6 +39,13 @@ public abstract class Context implements State {
 
     protected abstract void initCommunication();
 
+    public String getContextID() {
+        return contextID;
+    }
+
+    public void setContextID(String contextID) {
+        this.contextID = contextID;
+    }
 
     public void setEmploye(Employe employe){
         this.contextOwnerEmploye = employe;
@@ -74,7 +81,7 @@ public abstract class Context implements State {
 
     @Override
     public void doAction() {
-        this.executeAction();
+        //this.executeAction(() -> finish());
         if (hasEmploye())
             System.out.println("Se asigna contexto de comunicacion a empleado " + this.contextOwnerEmploye.getName()  +  " de jerarquia " + this.contextOwnerEmploye.getPriorityHierarchy());
         else
@@ -85,15 +92,23 @@ public abstract class Context implements State {
 
 
 
-    public void init(){
+    public void init()  {
         this.timeStampInitContext = new Timestamp(System.currentTimeMillis());
         TurnContextHandler.getInstance().initContext(this);
 
 
     }
 
-    public void finish() {
-        this.timeStampFinishContext = new Timestamp(System.currentTimeMillis());
-        TurnContextHandler.getInstance().finishContext(this);
+
+
+    public void finish() throws Exception {
+        try {
+            TurnContextHandler handler = TurnContextHandler.getInstance();
+            this.timeStampFinishContext = new Timestamp(System.currentTimeMillis());
+            handler.finishContext(this);
+            handler.assignContextFromWaitingRoom();
+        }catch (Exception ex){
+            throw  ex;
+        }
     }
 }

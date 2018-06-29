@@ -61,12 +61,12 @@ public abstract class Employe {
         setCommunicationContext(null);
     }
 
-    public void finishContext(){
+    public void finishContext() throws Exception {
         if (canFinish())
             this.communicationContext.finish();
     }
 
-    public void initCommunicationContext(){
+    public void initCommunicationContext() throws Exception {
         this.communicationContext.init();
 
 
