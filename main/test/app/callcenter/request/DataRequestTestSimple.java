@@ -40,12 +40,12 @@ public class DataRequestTestSimple {
 
 
 
-        // llega un contex sin implementar, tira un error de que no sabe que ese contexto
+        // llega un contex sin implementar, tira un error, diciendo que se desconoce el contexto a implementar
 
         CenterRequest data = new DataRequest();
         data.prosessRequest("Hola");
 
-
+        // ***************
 
         // llega una llamada
         data.prosessRequest("call");
@@ -53,13 +53,14 @@ public class DataRequestTestSimple {
         // llega la siguiente llamada
         data.prosessRequest("call");
 
-
+        // nos quedamos esperando , (las otras dos llamadas se siguen procesando  )
         Thread.sleep(3500);
-
+        
+        
         op1.finishContext(); // finalizo a la fuerza la llamada correspondiente a este empleado
 
-        // llegan 10 llamadas, tinen que se procesadas de manera concurrente, si aun hay llamadas siendo procesadas solo se procesaran hasta llegar a un
-        // maximo de 10, a las restantes se le enviara una notificacion pidiendo que lo intenten  mas tarde
+        // llegan 10 llamadas, tienen que ser procesadas de manera concurrente, si aun hay llamadas siendo procesadas solo se procesaran hasta llegar a un
+        // maximo de 10 llamadas concurrentes,a las restantes se le enviara una notificacion pidiendo que lo intenten  mas tarde
 
         System.out.println("*************** Entran 10 llamadas concurrentes ***************************");
         for (int i = 0; i < 10; i++) {
@@ -71,7 +72,7 @@ public class DataRequestTestSimple {
 
 
         // nos quedamos esperando a que terminen las demas llamadas
-        Thread.sleep(31000);
+        Thread.sleep(41000);
 
 
 
